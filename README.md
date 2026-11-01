@@ -83,3 +83,6 @@ tinyshell> exit
 
 ## Scope
 
+TinyShell is intentionally a learning-oriented shell, not a replacement for Bash
+or Zsh. Quoting, pipelines, redirection, job control, and shell scripting are
+outside the current scope. 
