@@ -11,16 +11,53 @@ TinyShell is a small interactive Unix shell written in C. It is designed as a fo
 - Bounded in-memory history (100 commands)
 - Strict compiler warnings and a dependency-free build
 
+## Requirements
+
+- A C11-compatible compiler such as GCC, Clang, or Apple Clang
+- `make`
+- A POSIX-compatible environment such as Linux or macOS
+
 ## Build and run
 
-TinyShell targets POSIX systems such as macOS and Linux.
+Build the shell from the project directory:
 
 ```sh
 make
 ./tinyshell
 ```
 
-Use `help` inside the shell to list built-ins. Press the up/down arrow keys to navigate command history. Run `make clean` to remove the compiled binary.
+The default build uses strict warnings and optimization. To use a different compiler,
+pass it to `make`:
+
+```sh
+make CC=clang
+```
+
+Run `make clean` to remove the compiled binary.
+
+## Usage
+
+Built-in commands:
+
+| Command | Description |
+| --- | --- |
+| `cd [directory]` | Change the working directory; defaults to `$HOME` |
+| `pwd` | Print the current working directory |
+| `printenv` | Print the shell environment |
+| `print_history` | Print commands from the current session |
+| `help` | List available built-ins |
+| `exit` | Exit TinyShell |
+
+You can assign environment variables directly and expand them in later commands:
+
+```text
+tinyshell> NAME=developer
+tinyshell> echo Hello $NAME
+Hello developer
+```
+
+Use the up and down arrow keys to navigate the in-memory command history, and
+Backspace to edit the current command. History is limited to the last 100 commands.
 
 ## Example
 
@@ -42,8 +79,10 @@ tinyshell> exit
 | `tinyshell.c` | REPL, built-ins, process execution |
 | `env.c/.h` | Assignments, environment listing, variable expansion |
 | `history.c/.h` | Bounded command history |
-| `rawmode.c/.h` | POSIX terminal mode management |
+| `rawmode.c/.h` | Terminal mode management |
 
 ## Scope
 
-This is intentionally a learning-oriented shell, not a replacement for Bash or Zsh. Quoting, pipelines, redirection, job control, and shell scripting are outside the current scope.
+TinyShell is intentionally a learning-oriented shell, not a replacement for Bash
+or Zsh. Quoting, pipelines, redirection, job control, and shell scripting are
+outside the current scope.
